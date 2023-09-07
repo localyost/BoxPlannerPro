@@ -1,5 +1,8 @@
 package com.localyost.boxplannerpro.remote;
 
+import com.localyost.boxplannerpro.remote.data.CrossfitClass;
+
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -19,5 +22,5 @@ public interface ApiService {
     Call<ResponseBody> login(@Body LoginBody body);
 
     @GET("breeze/SpecificScheduleBreeze/GetSchedulesForMonth")
-    Call<ResponseBody> getClasses(@Header("Cookie") String authToken, @QueryMap Map<String, String> queryParams);
+    Call<List<CrossfitClass>> getClasses(@Header("Cookie") String authToken, @QueryMap Map<String, String> queryParams);
 }
