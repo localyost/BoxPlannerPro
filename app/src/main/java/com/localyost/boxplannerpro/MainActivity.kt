@@ -3,6 +3,7 @@ package com.localyost.boxplannerpro
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import com.localyost.boxplannerpro.constants.SettingStrings
 import com.localyost.boxplannerpro.remote.ApiClient
 import com.localyost.boxplannerpro.remote.ApiService
 import okhttp3.ResponseBody
@@ -16,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
-        val loginToken = sharedPreferences.getString("token", "");
+        val loginToken = sharedPreferences.getString(SettingStrings.TOKEN, "");
 
         val apiInterface = ApiClient.getClient().create(ApiService::class.java)
         val call = apiInterface.isUserLoggedIn(loginToken)

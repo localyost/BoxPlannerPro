@@ -4,16 +4,35 @@
     android:theme="@style/AppBaseTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:id = "@+id/editText2"
-        android:layout_width = "wrap_content"
+    <TextView android:text = "@string/login" android:layout_width="wrap_content"
         android:layout_height = "wrap_content"
-        android:inputType = "textPassword" />
+        android:id = "@+id/textview"
+        android:textSize = "35sp"/>
+
 
     <EditText
-        android:id = "@+id/editText1"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
-        />
+        android:id = "@+id/email"
+        android:hint = "@string/enter_email"
+        android:focusable = "true"
+        android:textColorHighlight = "#ff7eff15"
+        android:textColorHint = "#FFFFFF"
+        android:layout_marginTop = "46dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:textColorHint="#FFFFFF"
+        android:hint="@string/password" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:id="@+id/submit" />
 
 </LinearLayout>
