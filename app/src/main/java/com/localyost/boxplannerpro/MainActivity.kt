@@ -27,6 +27,9 @@ class MainActivity : ComponentActivity() {
                 if (result == "false") {
                     val intent = Intent(this@MainActivity, LoginActivity::class.java)
                     startActivity(intent)
+                } else{
+                    val intent = Intent(this@MainActivity, CalenderActivity::class.java)
+                    startActivity(intent)
                 }
             }
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
