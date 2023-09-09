@@ -1,6 +1,8 @@
 package com.localyost.boxplannerpro
 
 import android.os.Bundle
+import android.view.View
+import android.widget.CalendarView
 import androidx.appcompat.app.AppCompatActivity
 import com.localyost.boxplannerpro.constants.SettingStrings
 import com.localyost.boxplannerpro.constants.Tracks
@@ -12,13 +14,22 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
 
-class CalenderActivity : AppCompatActivity() {
+class CalendarActivity : AppCompatActivity() {
 
-    var classes: List<CrossfitClass>? = null;
+    val classesMap = mutableMapOf<LocalDate, ArrayList<CrossfitClass>>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calender)
+        setContentView(R.layout.activity_calendar)
+        setCrossfitClasses()
+        val calendarView = findViewById<View>(R.id.calendar) as CalendarView
 
+        calendarView.setOnDateChangeListener(
+            CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
+
+            })
+    }
+
+    private fun setCrossfitClasses() {
         val apiInterface = ApiClient.getClient().create(ApiService::class.java)
         val sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
 
@@ -31,10 +42,18 @@ class CalenderActivity : AppCompatActivity() {
                 call: Call<List<CrossfitClass>>,
                 response: Response<List<CrossfitClass>>
             ) {
-                classes =
-                    response.body()
-                        ?.filter { crossfitClass -> !Tracks.isOpenGym(crossfitClass) }
-                        ?.filter { crossfitClass ->  crossfitClass.getDate().isAfter(dateOfClass)}
+
+                response.body()
+                    ?.filter { !Tracks.isOpenGym(it) }
+                    ?.filter { it.getDate().isAfter(dateOfClass)}
+                    ?.forEach {
+                        if (classesMap[it.getDateStart()] == null) {
+                            classesMap[it.getDateStart()] = arrayListOf(it)
+                        } else {
+                            classesMap[it.getDateStart()]?.add(it)
+                        }
+                    }
+                println()
             }
 
             override fun onFailure(call: Call<List<CrossfitClass>>, t: Throwable) {

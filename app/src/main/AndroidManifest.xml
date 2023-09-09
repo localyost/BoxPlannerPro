@@ -20,9 +20,9 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name=".CalenderActivity"
+            android:name=".CalendarActivity"
             android:exported="false"
-            android:label="@string/title_activity_calender"
+            android:label="@string/title_activity_calendar"
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".MainActivity"

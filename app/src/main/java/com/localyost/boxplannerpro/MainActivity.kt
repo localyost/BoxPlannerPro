@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     val intent = Intent(this@MainActivity, LoginActivity::class.java)
                     startActivity(intent)
                 } else{
-                    val intent = Intent(this@MainActivity, CalenderActivity::class.java)
+                    val intent = Intent(this@MainActivity, CalendarActivity::class.java)
                     startActivity(intent)
                 }
             }
