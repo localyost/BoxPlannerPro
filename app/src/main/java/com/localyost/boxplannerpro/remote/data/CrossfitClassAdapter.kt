@@ -15,8 +15,8 @@ class CrossfitClassAdapter(private val context: Context, private val arrayList: 
         return arrayList?.size ?: 0
     }
 
-    override fun getItem(p0: Int): Any {
-        return p0
+    override fun getItem(p0: Int): CrossfitClass? {
+        return arrayList?.get(p0)
     }
 
     override fun getItemId(p0: Int): Long {

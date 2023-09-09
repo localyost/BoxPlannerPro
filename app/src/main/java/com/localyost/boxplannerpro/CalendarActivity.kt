@@ -26,8 +26,16 @@ class CalendarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
-
         setCrossfitClasses()
+        setListClickActions()
+    }
+
+    private fun setListClickActions() {
+        listView = findViewById(R.id.listView);
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val cfClass = parent.adapter.getItem(position)
+            println(cfClass)
+        }
     }
 
     private fun setCrossfitClasses() {
@@ -56,7 +64,6 @@ class CalendarActivity : AppCompatActivity() {
                     }
 
                 calendarView = findViewById<View>(R.id.calendar) as CalendarView
-                listView = findViewById(R.id.listView);
                 calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
                     val selectedDate = LocalDate.of(year, month+1, dayOfMonth)
                     val classesOfDay = classesMap[selectedDate]
