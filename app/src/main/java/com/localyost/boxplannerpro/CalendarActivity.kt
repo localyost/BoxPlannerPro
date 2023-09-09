@@ -3,30 +3,31 @@ package com.localyost.boxplannerpro
 import android.os.Bundle
 import android.view.View
 import android.widget.CalendarView
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.localyost.boxplannerpro.constants.SettingStrings
 import com.localyost.boxplannerpro.constants.Tracks
 import com.localyost.boxplannerpro.remote.ApiClient
 import com.localyost.boxplannerpro.remote.ApiService
 import com.localyost.boxplannerpro.remote.data.CrossfitClass
+import com.localyost.boxplannerpro.remote.data.CrossfitClassAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
 
+
 class CalendarActivity : AppCompatActivity() {
 
-    val classesMap = mutableMapOf<LocalDate, ArrayList<CrossfitClass>>()
+    var classesMap = mutableMapOf<LocalDate, ArrayList<CrossfitClass>>()
+    lateinit var calendarView: CalendarView
+    lateinit var listView: ListView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
+
         setCrossfitClasses()
-        val calendarView = findViewById<View>(R.id.calendar) as CalendarView
-
-        calendarView.setOnDateChangeListener(
-            CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
-
-            })
     }
 
     private fun setCrossfitClasses() {
@@ -53,7 +54,15 @@ class CalendarActivity : AppCompatActivity() {
                             classesMap[it.getDateStart()]?.add(it)
                         }
                     }
-                println()
+
+                calendarView = findViewById<View>(R.id.calendar) as CalendarView
+                listView = findViewById(R.id.listView);
+                calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+                    val selectedDate = LocalDate.of(year, month+1, dayOfMonth)
+                    val classesOfDay = classesMap[selectedDate]
+
+                    listView.adapter = CrossfitClassAdapter(this@CalendarActivity, classesOfDay)
+                }
             }
 
             override fun onFailure(call: Call<List<CrossfitClass>>, t: Throwable) {

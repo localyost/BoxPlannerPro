@@ -29,4 +29,8 @@ data class CrossfitClass(
     fun getTrackId(): String {
         return trackId;
     }
+
+    fun getName(): String {
+        return name
+    }
 }
