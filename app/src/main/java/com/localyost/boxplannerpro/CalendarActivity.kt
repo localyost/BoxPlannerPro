@@ -48,10 +48,10 @@ class CalendarActivity : AppCompatActivity() {
                     ?.filter { !Tracks.isOpenGym(it) }
                     ?.filter { it.getDate().isAfter(dateOfClass)}
                     ?.forEach {
-                        if (classesMap[it.getDateStart()] == null) {
-                            classesMap[it.getDateStart()] = arrayListOf(it)
+                        if (classesMap[it.getDate()] == null) {
+                            classesMap[it.getDate()] = arrayListOf(it)
                         } else {
-                            classesMap[it.getDateStart()]?.add(it)
+                            classesMap[it.getDate()]?.add(it)
                         }
                     }
 

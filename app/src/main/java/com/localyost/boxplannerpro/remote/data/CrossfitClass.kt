@@ -2,6 +2,7 @@ package com.localyost.boxplannerpro.remote.data
 
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 data class CrossfitClass(
@@ -21,9 +22,9 @@ data class CrossfitClass(
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
         return LocalDate.parse(date, formatter)
     }
-    fun getDateStart(): LocalDate {
+    fun getDateStart(): LocalDateTime {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS")
-        return LocalDate.parse(dateStart, formatter)
+        return LocalDateTime.parse(dateStart, formatter)
     }
 
     fun getTrackId(): String {
